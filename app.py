@@ -3,8 +3,9 @@ import tempfile
 
 from langchain_groq import ChatGroq
 
-from config.settings import LLM_MODEL
+from config.settings import *
 
+from src.retrievers.hybrid_retriever import get_hybrid_retriever
 from src.embeddings import get_embeddings
 from src.pdf_loader import load_and_split
 from src.vector_store import create_vectorstore
@@ -62,8 +63,13 @@ if api_key:
         )
 
         ## Make the vectorstore as retriever and build the RAG chain
+        # Now we gonna use the Hybrid Search - Dense and Sparse search (MMR) for better results
 
-        retriever = vectorstore.as_retriever()
+## Hybrid Search - Ensemble of BM25 and FAISS with equal weights    
+        retriever = get_hybrid_retriever(
+            documents,
+            vectorstore
+        )
 
         chain = build_rag_chain(
             llm,
@@ -89,3 +95,28 @@ if api_key:
             st.success(
                 response["answer"]
             )
+
+
+            st.subheader("Sources")
+            pages = set()
+
+            for i, doc in enumerate(response["context"]):
+                st.write("Page:", doc.metadata.get("page"))
+                st.write(doc.page_content[:300])
+                st.write("="*50)
+
+            # with st.expander("Retrieved Context"):
+            #     for doc in response["context"]:
+            #         st.write(
+            #             f"Page: {doc.metadata.get('page') + 1}"
+            #         )
+            #     st.write(doc.page_content)
+
+            #     st.divider()
+            with st.expander("Retrieved Context"):
+                for i, doc in enumerate(response["context"]):
+                    st.write(
+                        f"Chunk {i+1} | Page: {doc.metadata.get('page') + 1}"
+                    )
+                    st.write(doc.page_content)
+                    st.divider()

@@ -13,3 +13,5 @@ transformers
 sentence-transformers
 torch
 torchvision
+langsmith
+rank-bm25
