@@ -1,15 +1,15 @@
-streamlit
-panda
-python-doten
+streamlit=
+pandas
+python-dotenv
 
-langchai
-langchain-cor
-langchain-classi
-langchain-communit
-langchain-text-splitter
-langchain-gro
-langchain-huggingfac
-langchain-chrom
+langchain
+langchain-core
+langchain-classic
+langchain-community
+langchain-text-splitters
+langchain-groq
+langchain-huggingface
+langchain-chroma
 
 chromadb
 rank-bm25
