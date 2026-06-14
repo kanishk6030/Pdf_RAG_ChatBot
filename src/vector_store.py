@@ -6,7 +6,7 @@ def create_vectorstore(documents, embeddings):
     vectorstore = Chroma.from_documents(
         documents,
         embeddings,
-        persist_directory="./chroma_db"
+        # persist_directory="./chroma_db"
     )
 
     return vectorstore
