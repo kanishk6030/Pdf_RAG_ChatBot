@@ -651,7 +651,7 @@ def build_knowledge_base(uploaded_files, api_key):
     embeddings = get_embeddings()
     vectorstore = create_vectorstore(documents, embeddings)
     retriever = get_hybrid_retriever(documents, vectorstore)
-    evaluate_retriever(retriever)
+    # evaluate_retriever(retriever)
 
     llm = ChatGroq(api_key=api_key, model=LLM_MODEL)
     chain = build_rag_chain(llm, retriever)
