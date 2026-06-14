@@ -25,7 +25,7 @@ def get_hybrid_retriever(
         vectorstore
     )
 
-    evaluate_retriever(chroma);
+    # evaluate_retriever(chroma)
 
     return EnsembleRetriever(
         retrievers=[bm25,chroma],
