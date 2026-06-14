@@ -13,7 +13,7 @@ def get_session_history(session_id: str) -> BaseChatMessageHistory:
 
     if "store" not in st.session_state:
         st.session_state.store = {}
-
+    ## This is for the llm to remember the previous conversation and context. It is stored in the session state of Streamlit.
     if session_id not in st.session_state.store:
         st.session_state.store[session_id] = (
             ChatMessageHistory()

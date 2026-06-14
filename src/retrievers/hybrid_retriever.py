@@ -4,8 +4,12 @@ from src.retrievers.bm25_retriever import (
     get_bm25_retriever
 )
 
-from src.retrievers.faiss_retriever import (
-    get_faiss_retriever
+from src.retrievers.chroma_retriever import (
+    get_chroma_retriever
+)
+
+from evaluation.retrieval_eval import (
+    evaluate_retriever
 )
 
 def get_hybrid_retriever(
@@ -17,11 +21,13 @@ def get_hybrid_retriever(
         split_docs
     )
 
-    faiss = get_faiss_retriever(
+    chroma = get_chroma_retriever(
         vectorstore
     )
 
+    evaluate_retriever(chroma);
+
     return EnsembleRetriever(
-        retrievers=[bm25,faiss],
+        retrievers=[bm25,chroma],
         weights=[0.5,0.5]
     )
