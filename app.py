@@ -658,7 +658,7 @@ def build_knowledge_base(uploaded_files, api_key):
 
     return chain, documents
 
-
+## This  function renders the context tabs in the Streamlit app. It takes the response from the RAG chain and displays the sources and retrieved chunks in separate tabs. Each source and chunk is displayed in an expandable section, allowing users to view the content of each document or chunk. The first source is expanded by default for better visibility.
 def render_context_tabs(response):
     context = response.get("context", [])
     if not context:
@@ -682,6 +682,7 @@ def render_context_tabs(response):
                 st.write(doc.page_content)
 
 
+#This function evaluates the quality of the answer provided by the RAG chain. It takes the response and the API key as inputs, extracts the context from the response, and calls the evaluate_response function to get an evaluation of relevance, faithfulness, and completeness. The evaluation results are displayed in a metrics format, and if there is any overall feedback, it is shown as a caption. The evaluation results are also saved to a CSV file for record-keeping.
 def render_evaluation(response, api_key):
     context_text = "\n\n".join(doc.page_content for doc in response.get("context", []))
 
@@ -854,5 +855,5 @@ if query:
     )
     st.session_state.last_context = response.get("context", [])
 
-    render_context_tabs(response)
-    render_evaluation(response, api_key)
+    # render_context_tabs(response)
+    # render_evaluation(response, api_key)
