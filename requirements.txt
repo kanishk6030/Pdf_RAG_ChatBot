@@ -18,9 +18,8 @@ pypdf==6.13.1
 sentence-transformers==5.5.1
 transformers==5.10.2
 torch==2.12.0
-torchvision==0.27.0
+
 
 langsmith==0.8.15
 grpcio==1.81.1
 protobuf==3.20.3
-datasets==5.0.0
