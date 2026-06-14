@@ -9,7 +9,7 @@ from langchain_groq import ChatGroq
 from config.settings import LLM_MODEL
 from evaluation.llm_eval import evaluate_response
 from evaluation.retrieval_eval import evaluate_retriever
-from src.embeddings import get_embeddings, load_embeddings
+from src.embeddings import  load_embeddings
 from src.pdf_loader import load_and_split
 from src.rag_chain import build_rag_chain
 from src.retrievers.hybrid_retriever import get_hybrid_retriever
@@ -717,12 +717,12 @@ def render_evaluation(response, api_key):
         "feedback": evaluation["overall_feedback"],
     }
 
-    pd.DataFrame([row]).to_csv(
-        "evaluation_results.csv",
-        mode="a",
-        header=False,
-        index=False,
-    )
+    # pd.DataFrame([row]).to_csv(
+    #     "evaluation_results.csv",
+    #     mode="a",
+    #     header=False,
+    #     index=False,
+    # )
 
 
 init_state()
@@ -855,5 +855,5 @@ if query:
     )
     st.session_state.last_context = response.get("context", [])
 
-    # render_context_tabs(response)
-    # render_evaluation(response, api_key)
+    render_context_tabs(response)
+    render_evaluation(response, api_key)

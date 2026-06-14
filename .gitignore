@@ -40,3 +40,4 @@ Desktop.ini
 *.tmp
 *.bak
 chroma_db/
+evaluation_results.csv
