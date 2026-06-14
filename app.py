@@ -9,7 +9,7 @@ from langchain_groq import ChatGroq
 from config.settings import LLM_MODEL
 from evaluation.llm_eval import evaluate_response
 from evaluation.retrieval_eval import evaluate_retriever
-from src.embeddings import get_embeddings
+from src.embeddings import get_embeddings, load_embeddings
 from src.pdf_loader import load_and_split
 from src.rag_chain import build_rag_chain
 from src.retrievers.hybrid_retriever import get_hybrid_retriever
@@ -648,7 +648,7 @@ def build_knowledge_base(uploaded_files, api_key):
             pass
 
 ## Embeddings are generated for the documents, a vector store is created, and a hybrid retriever is set up. The retriever is evaluated to ensure it works correctly. Finally, a RAG chain is built using the LLM and the retriever, and both the chain and the documents are returned.
-    embeddings = get_embeddings()
+    embeddings = load_embeddings()
     vectorstore = create_vectorstore(documents, embeddings)
     retriever = get_hybrid_retriever(documents, vectorstore)
     # evaluate_retriever(retriever)
